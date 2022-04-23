@@ -1,0 +1,8 @@
+.env
+*.env
+venv/
+.idea/
+__pycache__
+
+# compiled translation files
+*.mo
