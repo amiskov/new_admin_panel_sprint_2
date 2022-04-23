@@ -1,5 +1,7 @@
 run:
 	python manage.py runserver
+sh:
+	./manage.py shell_plus
 
 # Translations
 build-locale:

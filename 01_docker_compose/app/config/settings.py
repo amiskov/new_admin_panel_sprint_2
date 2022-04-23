@@ -34,7 +34,6 @@ DATABASES = {
     }
 }
 
-
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
@@ -130,7 +129,6 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / "staticfiles"
 
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 
@@ -140,22 +138,29 @@ LOCALE_PATH = ['movies/locale']
 
 LOGGING = {
     'version': 1,
+    'disable_existing_loggers': True,
     'filters': {
         'require_debug_true': {
             '()': 'django.utils.log.RequireDebugTrue',
         }
     },
+    'formatters': {
+        'default': {
+            'format': '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]',
+        },
+    },
     'handlers': {
-        'console': {
-            'level': 'DEBUG',
-            'filters': ['require_debug_true'],
+        'debug-console': {
             'class': 'logging.StreamHandler',
-        }
+            'formatter': 'default',
+            'filters': ['require_debug_true'],
+        },
     },
     'loggers': {
         'django.db.backends': {
             'level': 'DEBUG',
-            'handlers': ['console'],
+            'handlers': ['debug-console'],
+            'propagate': False,
         }
-    }
+    },
 }
