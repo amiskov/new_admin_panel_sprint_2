@@ -92,12 +92,13 @@ class GenreFilmwork(UUIDMixin):
         )
 
 
-class PersonFilmwork(UUIDMixin):
-    class Role(models.TextChoices):
-        ACTOR = "actor", _('actor')
-        WRITER = "writer", _('writer')
-        DIRECTOR = "director", _('director')
+class Role(models.TextChoices):
+    ACTOR = "actor", _('actor')
+    WRITER = "writer", _('writer')
+    DIRECTOR = "director", _('director')
 
+
+class PersonFilmwork(UUIDMixin):
     film_work = models.ForeignKey('Filmwork', on_delete=models.CASCADE)
     person = models.ForeignKey('Person', on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
