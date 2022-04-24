@@ -43,6 +43,8 @@ DEBUG = os.environ.get('DEBUG', False) == 'True'
 # For example: 'DJANGO_ALLOWED_HOSTS=localhost 127.0.0.1 [::1]'
 ALLOWED_HOSTS = os.environ.get("DJANGO_ALLOWED_HOSTS").split(" ")
 
+CORS_ALLOWED_ORIGINS = ["http://127.0.0.1:8080", "http://localhost:8080", ]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -55,12 +57,14 @@ INSTALLED_APPS = [
     'movies.apps.MoviesConfig',
     'debug_toolbar',
     'django_extensions',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
