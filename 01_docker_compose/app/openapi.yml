@@ -2,6 +2,8 @@ openapi: 3.0.0
 info:
   title: Movies ListApi
   version: v1
+servers:
+  - url: http://127.0.0.1:8000
 paths:
   /api/v1/movies/:
     get:
@@ -114,7 +116,7 @@ components:
           items:
             type: string
             description: Имя режиссера
-            example: Drama
+            example: Turgut Turk Adiguzel
         writers:
           type: array
           description: Список сценаристов
@@ -122,4 +124,4 @@ components:
           items:
             type: string
             description: Имя сценариста
-            example: Drama                
+            example: Turgut Turk Adiguzel
