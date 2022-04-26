@@ -12,6 +12,6 @@ docker-logs:
 	docker-compose logs -f
 swagger-run:
 	docker run --rm -p 8080:8080 --name swagger \
-		-v $(realpath ./app/openapi.yml):/swagger.yml \
+		-v $(realpath ./openapi.yml):/swagger.yml \
 		-e SWAGGER_JSON=/swagger.yml \
 		swaggerapi/swagger-ui
