@@ -2,11 +2,6 @@ run:
 	python manage.py runserver
 sh:
 	./manage.py shell_plus
-swagger:
-	docker run --rm -p 8080:8080 --name swagger \
-		-v $(realpath openapi.yml):/swagger.yml \
-		-e SWAGGER_JSON=/swagger.yml \
-		swaggerapi/swagger-ui
 # Translations
 build-locale:
 	python manage.py compilemessages -l en -l ru
