@@ -23,6 +23,8 @@ RUN flake8 --ignore=E501,F401 .
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
 
+COPY ./db.json.zip .
+
 
 #########
 # FINAL #
