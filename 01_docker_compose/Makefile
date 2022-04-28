@@ -2,16 +2,15 @@ docker-up:
 	docker-compose up -d --build
 docker-down:
 	docker-compose down -v
-docker-fill:
+docker-migrate:
 	docker-compose exec db psql --username=movies_db --dbname=movies_db -c 'CREATE SCHEMA IF NOT EXISTS content;'
-	docker-compose exec backend sh -c " \
-		echo 'Applying migrations...' ; \
-		./manage.py migrate --noinput ; \
-		echo 'Collecting static files...' ; \
-		./manage.py collectstatic --no-input --clear ; \
-		echo 'Filling the DataBase with test data...' ; \
-		./manage.py loaddata db.json ; \
-		echo 'All done! Check http://localhost:8000/admin (use admin/admin to log in)'"
+	docker-compose exec backend ./manage.py migrate --noinput
+docker-collectstatic:
+	docker-compose exec backend ./manage.py collectstatic --no-input --clear
+docker-fill-db:
+	docker compose cp app/db.json.zip db:/tmp
+	docker-compose exec backend ./manage.py loaddata db.json
+docker-fill: docker-migrate docker-collectstatic docker-fill-db
 docker-logs:
 	docker-compose logs -f
 swagger-run:

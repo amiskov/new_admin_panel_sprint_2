@@ -16,14 +16,9 @@ RUN apk update \
 
 # lint
 RUN pip install --upgrade pip
-RUN pip install flake8==3.9.2
-COPY . .
-RUN flake8 --ignore=E501,F401 .
 
 COPY ./requirements.txt .
 RUN pip wheel --no-cache-dir --no-deps --wheel-dir /usr/src/app/wheels -r requirements.txt
-
-COPY ./db.json.zip .
 
 
 #########
@@ -57,6 +52,7 @@ RUN chmod +x  $APP_HOME/entrypoint.sh
 
 # copy project
 COPY . $APP_HOME
+RUN flake8 --ignore=E501,F401 .
 
 # chown all the files to the app user
 RUN chown -R app:app $APP_HOME
