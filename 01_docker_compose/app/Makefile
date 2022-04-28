@@ -9,6 +9,15 @@ collect-locale:
 	python manage.py makemessages -l en -l ru
 
 # DB content Schema
+run-db:
+	docker run -d \
+		--name postgres \
+		-p 5432:5432 \
+		-v ~/postgresql/data:/var/lib/postgresql/data \
+		-e POSTGRES_PASSWORD=123qwe \
+		-e POSTGRES_USER=app \
+		-e POSTGRES_DB=movies_db  \
+		postgres:13
 drop-schema:
 	psql -h 127.0.0.1 -U app movies_db -c 'DROP SCHEMA content CASCADE;'
 create-schema:
